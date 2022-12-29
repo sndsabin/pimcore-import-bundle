@@ -3,7 +3,7 @@ An opinionated pimcore bundle for importing files.
 
 - [Supports](#supports)
 - [Installation](#installation)
-- [Example use case](#example-use-case)
+- [Example use case (Import)](#example-use-case-import)
 
 ## Supports
 - CSV
@@ -23,21 +23,82 @@ composer require sndsabin/import-bundle
 bin/console pimcore:bundle:enable ImportBundle
 ```
 
-### Step 2 (add your configuration)
+## Example use case: Import
+Let's say records of **customer** has to be imported to **[Customer DataObject Class](./Docs/Examples/DataObject/class_Customer_export.sample.json)** called from [customer.csv](./Docs/Examples/import-data/customer.csv).
+
+### Step 3 (add mapper)
+```php
+<?php
+
+namespace App\Mapper;
+
+use Pimcore\Model\DataObject\Customer;
+use SNDSABIN\ImportBundle\Helper\IdentifierType;
+use SNDSABIN\ImportBundle\Contract\MapperInterface;
+
+class CustomerMapper implements MapperInterface
+{
+    /** @var string */
+    const FOLDER = 'customer'; // the folder inside which all customer data objects would be created
+
+    /**
+     * @param array $data
+     * @return array
+     */
+    public function map(array $data): array
+    {
+        return [
+            'folder' => self::FOLDER,
+            'class' => Customer::class,
+            'identifier' => [
+                'attribute' => 'code',
+                'value' => $data['Code'],
+                'type' => IdentifierType::NON_CONDITIONAL
+            ],
+            'attributes' => [
+                'code' => $data['Code'],
+                'firstname' => $data['First Name'],
+                'lastname' => $data['Last Name'],
+                'email' => $data['Email'],
+                'company' => $data['Company'],
+                'address' => $data['Address'],
+                'country' => $data['Country'],
+                'phone' => $data['Phone'],
+                'acceptsMarketing' => (bool) $data['Accepts Marketing'],
+                'key' => "{$data['Code']}-{$data['First Name']}",
+                'localisedField' => [
+                    [
+                        'attribute' => 'note',
+                        'value' => $data['Note English'],
+                        'language' => 'en'
+                    ],
+                    [
+                        'attribute' => 'note',
+                        'value' => $data['Note Nepali'],
+                        'language' => 'ne'
+                    ]
+                ]
+            ]
+        ];
+
+    }
+}
+```
+**@see** [CustomerMapper.md](Docs/Examples/Mapper/CustomerMapper.md) for more info on how to use *IdentifierType::CONDITIONAL*.
+### Step 4 (add configuration)
 configure `import.yaml` for the **class** (Example: `customer` in this case) you wish to import
 
 ```yaml
 #config/packages/import.yaml
 import:
     config:
-        base_directory: '' # base directory where all the files to be imported are located (recommended)
+        base_directory: '/var/www/html/import-data' # base directory where all the files to be imported are located (recommended)
         customer:
-            file: '' # file name (recommended)
-            importer: '' # only required if other than base importer is to be used
-            mapper: '' # optional
+            file: 'customer.csv'  # file name (recommended)
+            mapper: 'App\Mapper\CustomerMapper'
 ```
-
-### Step 4 (import using command)
+**@see** [CommandConfigResolver.php](src/Traits/CommandConfigResolver.php) and [CommandConfigValidator.php](src/Traits/CommandConfigValidator.php) for more info on how these attributes are parsed and validated.
+### Step 5 (import using command)
 
 ```php
 bin/console data:import [options]
@@ -52,6 +113,3 @@ Options:
 ```php
 bin/console data:import -c customer
 ```
-
-## Example use case
-To be added

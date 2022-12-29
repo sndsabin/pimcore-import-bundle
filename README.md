@@ -84,7 +84,7 @@ class CustomerMapper implements MapperInterface
     }
 }
 ```
-**@see** [CustomerMapper.md](Docs/Examples/Mapper/CustomerMapper.md) for more info on how to use *IdentifierType::CONDITIONAL*.
+**@see** [CustomerMapper.md](Docs/Examples/Mapper/CustomerMapper.md) for more info on how to use **IdentifierType::CONDITIONAL** and **IdentifierType::CONDITIONAL_PARAM**.
 ### Step 4 (add configuration)
 configure `import.yaml` for the **class** (Example: `customer` in this case) you wish to import
 
@@ -98,6 +98,8 @@ import:
             mapper: 'App\Mapper\CustomerMapper'
 ```
 **@see** [CommandConfigResolver.php](src/Traits/CommandConfigResolver.php) and [CommandConfigValidator.php](src/Traits/CommandConfigValidator.php) for more info on how these attributes are parsed and validated.
+
+**@see** [Sample Config File](Docs/Examples/Config/import.example.yaml) for all the configurable attributes.
 ### Step 5 (import using command)
 
 ```php
@@ -106,7 +108,7 @@ bin/console data:import [options]
 Options:
   -c, --class=CLASS                     DataObject whose data is to be imported
   -f, --file[=FILE]                     path of the data file
-      --book-keeping|--no-book-keeping  maintain the records (or do not maintain --no-book-keeping) of imported csv file
+      --book-keeping|--no-book-keeping  maintain the records (or do not maintain --no-book-keeping) of imported file
 ```
 
 #### Example usage (for **customer** class)

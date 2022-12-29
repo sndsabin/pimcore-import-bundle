@@ -59,7 +59,7 @@ class ImportCommand extends AbstractCommand
             ->setHelp('bin/console data:import -c customer')
             ->addOption('class', 'c', InputOption::VALUE_REQUIRED, 'DataObject whose data is to be imported')
             ->addOption('file', 'f', InputOption::VALUE_OPTIONAL, 'path of the data file')
-            ->addOption('book-keeping', null, InputOption::VALUE_NEGATABLE, 'maintain the records (or do not maintain --no-book-keeping) of imported csv file', true);
+            ->addOption('book-keeping', null, InputOption::VALUE_NEGATABLE, 'maintain the records (or do not maintain --no-book-keeping) of imported file', true);
     }
 
     /**

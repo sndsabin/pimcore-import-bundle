@@ -18,10 +18,7 @@ trait CommandConfigResolver
      */
     public function resolve(): array
     {
-        $class = ucfirst($this->class);
-        $mapper = $this->config->get("{$this->class}.mapper") !== '' ?
-            $this->config->get("{$this->class}.mapper") :
-            "SNDSABIN\ImportBundle\Mapper\\{$class}Mapper";
+        $mapper = $this->config->get("{$this->class}.mapper");
         $importer = $this->config->get("{$this->class}.importer") !== '' ?
             $this->config->get("{$this->class}.importer") :
             "SNDSABIN\ImportBundle\Importer\BaseImporter";

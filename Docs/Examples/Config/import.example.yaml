@@ -1,7 +1,7 @@
 import:
     config:
-        base_directory: '' # base directory where all the files to be imported are located (recommended)
+        base_directory: '' # base directory where all the files to be imported are located (required)
         customer:
-            file: '' # file name (recommended)
+            file: '' # file name (required)
+            mapper: '' # required
             importer: '' # only required if other than base importer is to be used
-            mapper: '' # optional

@@ -92,10 +92,10 @@ configure `import.yaml` for the **class** (Example: `customer` in this case) you
 #config/packages/import.yaml
 import:
     config:
-        base_directory: '/var/www/html/import-data' # base directory where all the files to be imported are located (recommended)
+        base_directory: '/var/www/html/import-data' # base directory where all the files to be imported are located (required)
         customer:
-            file: 'customer.csv'  # file name (recommended)
-            mapper: 'App\Mapper\CustomerMapper'
+            file: 'customer.csv'  # file name (required)
+            mapper: 'App\Mapper\CustomerMapper' # mapper (required)
 ```
 **@see** [CommandConfigResolver.php](src/Traits/CommandConfigResolver.php) and [CommandConfigValidator.php](src/Traits/CommandConfigValidator.php) for more info on how these attributes are parsed and validated.
 

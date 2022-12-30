@@ -1,6 +1,0 @@
-import:
-    config:
-        base_directory: '/var/www/html/import-data'
-        customer:
-            file: 'customer.csv'
-            mapper: 'App\Mapper\CustomerMapper'

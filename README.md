@@ -48,9 +48,9 @@ class CustomerMapper implements MapperInterface
     public function map(array $data): array
     {
         return [
-            'folder' => self::FOLDER,
-            'class' => Customer::class,
-            'identifier' => [
+            'folder' => self::FOLDER, // mandatory
+            'class' => Customer::class, // mandatory
+            'identifier' => [ // analogous to primary key: used for update operation (mandatory) 
                 'attribute' => 'code',
                 'value' => $data['Code'],
                 'type' => IdentifierType::NON_CONDITIONAL
@@ -65,7 +65,7 @@ class CustomerMapper implements MapperInterface
                 'country' => $data['Country'],
                 'phone' => $data['Phone'],
                 'acceptsMarketing' => (bool) $data['Accepts Marketing'],
-                'key' => "{$data['Code']}-{$data['First Name']}",
+                'key' => "{$data['Code']}-{$data['First Name']}", // o_key (mandatory)
                 'localisedField' => [
                     [
                         'attribute' => 'note',
@@ -84,7 +84,7 @@ class CustomerMapper implements MapperInterface
     }
 }
 ```
-**@see** [CustomerMapper.md](Docs/Examples/Mapper/CustomerMapper.md) for more info on how to use **IdentifierType::CONDITIONAL** and **IdentifierType::CONDITIONAL_PARAM**.
+**@see** [CustomerMapper.md](Docs/Examples/Mapper/CustomerMapper.md) for more examples on how to use **IdentifierType::CONDITIONAL** and **IdentifierType::CONDITIONAL_PARAM**.
 ### Step 4 (add configuration)
 configure `import.yaml` for the **class** (Example: `customer` in this case) you wish to import
 

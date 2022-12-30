@@ -24,7 +24,7 @@ bin/console pimcore:bundle:enable ImportBundle
 ```
 
 ## Example use case: Import
-Let's say records of **customer** has to be imported to **[Customer DataObject Class](./Docs/Examples/DataObject/class_Customer_export.sample.json)** called from [customer.csv](./Docs/Examples/import-data/customer.csv).
+Let's say records of **customer** has to be imported to **[Customer DataObject Class](./Docs/Examples/DataObject/class_Customer_export.sample.json)** from [customer.csv](./Docs/Examples/import-data/customer.csv).
 
 ### Step 3 (add mapper)
 ```php

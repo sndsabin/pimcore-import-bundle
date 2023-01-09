@@ -30,7 +30,8 @@ trait CommandConfigValidator
             throw new ConfigValidatorException('base_directory not configured correctly in import config');
         }
 
-        if (!$this->file && !$this->config->get('mapper')) {
+
+        if (!$this->file && !$this->config->get("{$this->class}.mapper")) {
             throw new ConfigValidatorException("mapper not configured correctly in import config for {$this->class} class");
         }
 

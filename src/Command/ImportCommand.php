@@ -16,6 +16,7 @@ use SNDSABIN\ImportBundle\Exception\ConfigValidatorException;
 use SNDSABIN\ImportBundle\Helper\Config;
 use SNDSABIN\ImportBundle\Helper\ImportProcessor;
 use SNDSABIN\ImportBundle\Parser\CsvParser;
+use SNDSABIN\ImportBundle\Parser\JsonParser;
 use SNDSABIN\ImportBundle\Traits\CommandConfigResolver;
 use SNDSABIN\ImportBundle\Traits\CommandConfigValidator;
 use Symfony\Component\Console\Command\Command;
@@ -109,9 +110,9 @@ class ImportCommand extends AbstractCommand
     {
         $n = strrpos($file, '.');
         $extension = $n === false ? '' : substr($file, $n+1);
-
         return match ($extension) {
             'csv' => CsvParser::class,
+            'json' => JsonParser::class,
             default => ''
         };
     }

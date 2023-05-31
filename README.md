@@ -7,6 +7,7 @@ An opinionated pimcore bundle for importing files.
 
 ## Supports
 - CSV
+- JSON
 
 ## Installation
 ### Prerequisite
